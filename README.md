@@ -2,6 +2,7 @@ This is the core AHK library that I use as a ST member.
 
 ## What's it do?
 This library provides functions you can bind to a single hot key to do the following things (just some examples):
+
 1. Open the SolarWorks page for a project (`OpenSolarWorks()`)
 2. Open the project folder on Triton (`OpenProjectFolder()`)
 3. Open the photos, drawings, or PDF folder on Triton (`OpenPhotosFolder()` etc)
@@ -10,6 +11,7 @@ This library provides functions you can bind to a single hot key to do the follo
 6. Open the latest ENP Excel file (`OpenLatestENP()`)
 
 It can work in two different ways:
+
 1. **Clipboard Mode**: The above functions/hotkeys will attempt to find a project number in your clipboard and work from that
 2. **Active Project Mode**: "Set it and forget it", press a hotkey to read the project number from your clipboard and set it as your active project, the hotkeys above work no matter what is in your clipboard.
 
