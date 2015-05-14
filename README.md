@@ -37,7 +37,7 @@ Then you can bind hotkeys to these functions in your AHK configuration just as y
 Copy a project number into your clipboard, and press **Windows + F12** and watch as SolarWorks magically opens.
 
 #### Using 'Active Project Mode'
-To use active project mode, you need to have a hotkey bound to `SetProjectFromClipboard()`. I use **Ctrl + Win + V**:
+To use active project mode, you you must have `UseProjectNumberFromClipboard = 0` in your main AHK file and you need to have a hotkey bound to `SetProjectFromClipboard()`. I use **Ctrl + Win + V**:
 ```
 #^v:: SetProjectFromClipboard()
 ```
