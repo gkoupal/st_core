@@ -254,6 +254,15 @@ OpenLatestReviewPackage() {
 	return ""
 }
 
+OpenSolarWorks() {
+	projectnumber := GetProject()
+	If projectnumber <> 0
+	{
+		Location := "https://soleo.solarcity.com/Results.aspx?BillingType=Undefined&JobNumber=-" . projectnumber . "-"
+		Run %location%
+	}
+}
+
 Find01PDF(projectnumber) {
 	file := FindLatestFile(PDFFolder(projectnumber), "*_01.pdf", 0)
 	return file
