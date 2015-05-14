@@ -25,7 +25,7 @@ First, make sure you have AutoHotkey v1.1 or newer installed.
 [updater_url]: https://raw.githubusercontent.com/ngordon-scty/st_core/master/update_st_core.ahk
 
 ## Usage
-Once the library is downloaded, (to `C:\st_core` in this example), your main `AutoHotkey.ahk` file (*can be found by right clicking AHK in your system tray and pressing "edit this script"*) needs to have the following lines added at the very beginning of the:
+Once the library is downloaded, (to `C:\st_core` in this example), your main `AutoHotkey.ahk` file (*can be found by right clicking AHK in your system tray and pressing "edit this script"*) needs to have the following lines added at the very beginning of the file:
 ```
 #Include c:\st_core\st_core.ahkl         ;this is the path to the library
 UseProjectNumberFromClipboard = 1        ;1 for "Clipboard Mode", 0 for "Active Project Mode"
