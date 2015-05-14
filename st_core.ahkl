@@ -1,5 +1,5 @@
 GetSTCoreVersion() {
-	return 1.00
+	return 1.01
 }
 
 GetProjectFileLocation() {
