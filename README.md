@@ -39,6 +39,7 @@ Copy a project number into your clipboard, and press **Windows + F12** and watch
 #### Using 'Active Project Mode'
 To use active project mode, you you must have `UseProjectNumberFromClipboard = 0` in your main AHK file and you need to have a hotkey bound to `SetProjectFromClipboard()`. I use **Ctrl + Win + V**:
 ```
+UseProjectNumberFromClipboard = 0
 #^v:: SetProjectFromClipboard()
 ```
 ... but any hotkey will work. For me, selecting a project number, pressing **Ctrl + C** and then **Ctrl + Win + V** is easy and intuitive to make it my active project.
