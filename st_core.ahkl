@@ -10,7 +10,7 @@ GetProject() {
 	Global
 	If UseProjectNumberFromClipboard = 1 
 	{
-		project_number = GetProjectFromClipboard()
+		project_number := GetProjectFromClipboard()
 		If project_number <> 0 
 		{
 			return %project_number%
