@@ -15,14 +15,16 @@ It can work in two different ways:
 1. **Clipboard Mode**: The above functions/hotkeys will attempt to find a project number in your clipboard and work from that
 2. **Active Project Mode**: "Set it and forget it", press a hotkey to read the project number from your clipboard and set it as your active project, the hotkeys above work no matter what is in your clipboard.
 
-## Installation
+## Installation / Quick Start
 
 First, make sure you have AutoHotkey v1.1 or newer installed.
 
 1. Download [update_st_core.ahk][updater_url] (<- right click, save as) from this repository and save it where you want the st_core library to live on your computer.
-2. Double-click **`update_st_core.ahk`**. The latest version of `st_core.ahk` and `update_st_core.ahk` will be downloaded to the folder you're in.
+2. Double-click **`update_st_core.ahk`**. The latest version of `st_core.ahk` and `update_st_core.ahk` will be downloaded to the folder you're in, as well as `st_default_keys.ahk`.
+3. **Quick-Start**: If you are a new AHK user, you can just double click `st_default_keys.ahk` and you'll be configured to use the keys as outlined [here][example_url]!
 
 [updater_url]: https://raw.githubusercontent.com/ngordon-scty/st_core/master/update_st_core.ahk
+[example_url]: https://github.com/ngordon-scty/st_core/blob/master/examples/README.md
 
 ## Usage
 Once the library is downloaded, (to `C:\st_core` in this example), your main `AutoHotkey.ahk` file (*can be found by right clicking AHK in your system tray and pressing "edit this script"*) needs to have the following lines added at the very beginning of the file:
