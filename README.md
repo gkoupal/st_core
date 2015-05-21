@@ -60,6 +60,7 @@ These functions take action based on the active project or project number in you
 * `OpenLatestENP()` - Opens the latest ENP Excel workbook in the structural folder
 * `OpenLatestReviewPackage()` - Opens the latest PDF review package found in the structural folder
 * `OpenSolarWorks()` - Opens the SolarWorks page for the project
+* `OpenAHJPage()` - Opens the AHJ page for the project
 
 ##### Still pretty useful:
 * `ProjectFolder(projectnumber)` - returns the path to the project folder for `projectnumber`

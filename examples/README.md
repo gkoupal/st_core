@@ -9,6 +9,7 @@ The keys are configured as follows:
 ##### SolarWorks
 
 * **Win + F12** opens SolarWorks
+* **Win + F10** opens the AHJ page
 
 ##### Photos
 

@@ -4,6 +4,7 @@ UseProjectNumberFromClipboard = 1
 
 ;/* SOLARWORKS PAGE */
 #F12:: OpenSolarWorks()			;Win + F12 opens SolarWorks
+#F10:: OpenAHJPage()			;Win + F10 opens the AHJ page
 
 ;/* PHOTOS */
 #9:: OpenPhotosFolder()			;Win + 9 opens photos folder
