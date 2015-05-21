@@ -50,11 +50,20 @@ GetProjectFromClipboard() {
 	return 0
 }
 
-GetInstID(ProjNum) {
-	return GetExcelJobListColumn(ProjNum,"InstID")
+GetInstIDFromAPI(projectnumber) {
+	apiurl := "http://10.100.1.148/designapi/api/customer/installation/"
+	tmpfile = %A_ScriptDir%\instid.tmp
+	UrlDownloadToFile, %apiurl%%projectnumber%, %tmpfile%
+	FileReadLine, InstID, %tmpfile%, 1
+	FileDelete, %tmpfile%
+	return %InstID%
 }
 
-GetExcelJobListColumn(ProjNum, ColumnName) {
+GetInstIDFromExcel(projectnumber) {
+	return GetExcelJobListColumn(projectnumber,"InstID")
+}
+
+GetExcelJobListColumn(projectnumber, ColumnName) {
 	retval := 0
 	try
 	{
@@ -68,7 +77,7 @@ GetExcelJobListColumn(ProjNum, ColumnName) {
 			{
 				break
 			}
-			if (JobList.Range("JobsTable[Job Number]").Cells(j,1).Value = ProjNum)
+			if (JobList.Range("JobsTable[Job Number]").Cells(j,1).Value = projectnumber)
 			{
 				retval := JobList.Range("JobsTable[" . ColumnName . "]").Cells(j,1).Value
 				break
@@ -90,8 +99,10 @@ ProjectFolder(projectnumber) {
 	}
 }
 
-AHJLink(projectnumber) {
-	InstID := GetInstID(projectnumber)
+AHJLink(projectnumber, instid = -1) {
+	if(instid = -1) {
+		instid := GetInstIDFromAPI(projectnumber)
+	}
 	if (InstID > 0) {
 		return "http://ahj.solarcity.com/installations/" InstID
 	}
@@ -260,6 +271,18 @@ OpenSolarWorks() {
 	{
 		Location := "https://soleo.solarcity.com/Results.aspx?BillingType=Undefined&JobNumber=-" . projectnumber . "-"
 		Run %location%
+	}
+}
+
+OpenAHJPage() {
+	projectnumber := GetProject()
+	If projectnumber <> 0
+	{
+		Location := AHJLink(projectnumber)
+		if Location <> ""
+		{
+			Run %Location%
+		}
 	}
 }
 
