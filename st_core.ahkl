@@ -324,7 +324,3 @@ GoRemote() {
 NotRemote() {
 	FileDelete, c:\remote
 }
-
-StartSync(projectnumber) {
-	Run, "C:\Program Files (x86)\2BrightSparks\SyncBackFree\SyncBackFree.exe" %projectnumber%
-}
