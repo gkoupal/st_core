@@ -28,6 +28,7 @@ GetProject() {
 
 SetProject(project_number) {
 	loc := GetProjectFileLocation()
+	project_number := SanitizeProjectNumber(project_number)
 	FileDelete, %loc%
 	FileAppend, %project_number%, %loc%
 }
@@ -50,18 +51,14 @@ SanitizeProjectNumber(project_number) {
 		project_number := SubStr(project_number,spos,InStr(project_number, "-", 0, spos) - spos)
 		return SanitizeProjectNumber(project_number)
 	}
+	return 0
 }
 
 GetProjectFromClipboard() {
 	project_number = %Clipboard%
 	StringReplace,project_number,project_number,`n,,A
 	StringReplace,project_number,project_number,`r,,A
-	project_number = %project_number%
-	if project_number is digit
-	{
-		return %project_number%
-	}
-	return 0
+	return SanitizeProjectNumber(project_number)
 }
 
 GetInstIDFromAPI(projectnumber) {
