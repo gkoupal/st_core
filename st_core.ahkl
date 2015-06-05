@@ -38,6 +38,20 @@ SetProjectFromClipboard() {
 	return GetProject()
 }
 
+SanitizeProjectNumber(project_number) {
+	project_number = %project_number%
+	if project_number is digit
+	{
+		return %project_number%
+	}
+	if InStr(project_number, "JB-")
+	{
+		spos := InStr(project_number, "JB-") + 3
+		project_number := SubStr(project_number,spos,InStr(project_number, "-", 0, spos) - spos)
+		return SanitizeProjectNumber(project_number)
+	}
+}
+
 GetProjectFromClipboard() {
 	project_number = %Clipboard%
 	StringReplace,project_number,project_number,`n,,A
