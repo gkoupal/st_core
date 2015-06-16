@@ -132,23 +132,11 @@ StructuralFolder(projectnumber) {
 	return ProjectFolder(projectnumber) "\Drawings\Structural"
 }
 
-NYOutgoingFolder(projectnumber) {
+NYOutgoingFolder(projectnumber,consultant="") {
 	Global
-	JobListStatus := GetExcelJobListColumn(projectnumber, "Status")
-	StringLower, JobListStatus, JobListStatus
-	Suffix := ""
-	If JobListStatus <> 0 
-	{
-		If InStr(JobListStatus, "pzse") 
-		{
-			Suffix := " - P"
-		}
-		If InStr(JobListStatus, "eclipse")
-		{
-			Suffix := " - E"
-		}
-	}
-	return NYOutgoingFolder "\" projectnumber " - Stamped" Suffix
+	if consultant = ""
+		consultant = DefaultNYConsultant
+	return DropboxFolder "\" consultant "\Incoming\" projectnumber " - Stamped"
 }
 
 PDFFolder(projectnumber) {
@@ -199,11 +187,11 @@ OpenStructuralFolder() {
 	}
 }
 
-OpenNYOutgoingFolder() {
+OpenNYOutgoingFolder(consultant="") {
 	projectnumber := GetProject()
 	If projectnumber <> 0
 	{
-		Location := NYOutgoingFolder(projectnumber)
+		Location := NYOutgoingFolder(projectnumber,consultant)
 		Run %Location%
 	}
 }
