@@ -320,7 +320,6 @@ FindLatestFile(path, pattern, recurse, ignore="") {
 	IgnoreList =
 	If StrLen(ignore) > 0
 	{
-		MsgBox, % ignore
 		Loop, %ignorematch%, 0, %recurse%
 			IgnoreList = %IgnoreList%%A_LoopFileFullPath%`n
 	}
