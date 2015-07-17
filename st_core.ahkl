@@ -1,6 +1,9 @@
 GetSTCoreVersion() {
-	return 1.03
+	return 1.04
 }
+
+;===Default Options===
+Ignore00Set = 1		;Should FindLatestReviewPackage ignore the *-00.pdf review package?
 
 GetProjectFileLocation() {
 	return "c:\CurrentProjectNumber.txt"
@@ -296,7 +299,11 @@ FindLatestPhoto(projectnumber) {
 }
 
 FindLatestReviewPackage(projectnumber) {
-	file := FindLatestFile(StructuralFolder(projectnumber), "*JB-" . projectnumber . "*.pdf", 1)
+	Global Ignore00Set
+	ignore := ""
+	If Ignore00Set
+		ignore := "*" . projectnumber . "-00.pdf"
+	file := FindLatestFile(StructuralFolder(projectnumber), "*JB-" . projectnumber . "*.pdf", 1, ignore)
 	return file
 }
 
@@ -305,10 +312,18 @@ FindLatestENP(projectnumber) {
 	return file
 }
 
-FindLatestFile(path, pattern, recurse) {
+FindLatestFile(path, pattern, recurse, ignore="") {
 	match := path . "\" . pattern
+	ignorematch := path . "\" . ignore
 	latestfile = ""
 	FileList =
+	IgnoreList =
+	If StrLen(ignore) > 0
+	{
+		MsgBox, % ignore
+		Loop, %ignorematch%, 0, %recurse%
+			IgnoreList = %IgnoreList%%A_LoopFileFullPath%`n
+	}
 	Loop, %match%, 0,%recurse%
 		FileList = %FileList%%A_LoopFileTimeModified%`t%A_LoopFileFullPath%`n
 	Sort, FileList  ; Sort by date.
@@ -317,6 +332,8 @@ FindLatestFile(path, pattern, recurse) {
 		if A_LoopField =  ; Omit the last linefeed (blank item) at the end of the list.
 			continue
 		StringSplit, FileItem, A_LoopField, %A_Tab%  ; Split into two parts at the tab char.
+		if InStr(IgnoreList, FileItem2)
+			continue
 		latestfile = %FileItem2%
 	}
 	if latestfile <> ""
