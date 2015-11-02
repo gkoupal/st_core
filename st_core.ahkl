@@ -1,9 +1,10 @@
 GetSTCoreVersion() {
-	return 1.04
+	return 1.05
 }
 
 ;===Default Options===
-Ignore00Set = 1		;Should FindLatestReviewPackage ignore the *-00.pdf review package?
+SearchForLegacyReviewPackages = 1	;Should FindLatestReviewPackage search for review packages matching the old file naming scheme?
+Ignore00Set = 1						;Should FindLatestReviewPackage ignore the *-00.pdf review package? Only matters if looking for legacy review packages
 
 GetProjectFileLocation() {
 	return "c:\CurrentProjectNumber.txt"
@@ -172,6 +173,18 @@ OpenPDFFolder() {
 	}
 }
 
+OpenStampedFolder() {
+	projectnumber := GetProject()
+	If projectnumber <> 0
+	{
+		Location := FindStampedFolder(projectnumber)
+		If Location <> ""
+		{
+			Run %Location%
+		}
+	}
+}
+
 OpenPhotosFolder() {
 	projectnumber := GetProject()
 	If projectnumber <> 0
@@ -267,6 +280,34 @@ OpenLatestReviewPackage() {
 	return ""
 }
 
+OpenPlansToStamp() {
+	projectnumber := GetProject()
+	If projectnumber <> 0
+	{
+		rp := FindPlansToStamp(projectnumber)
+		if rp <> ""
+		{
+			Run %rp%
+			return %rp%
+		}
+	}
+	return ""
+}
+
+OpenCalcsToStamp() {
+	projectnumber := GetProject()
+	If projectnumber <> 0
+	{
+		rp := FindCalcsToStamp(projectnumber)
+		if rp <> ""
+		{
+			Run %rp%
+			return %rp%
+		}
+	}
+	return ""
+}
+
 OpenSolarWorks() {
 	projectnumber := GetProject()
 	If projectnumber <> 0
@@ -298,12 +339,37 @@ FindLatestPhoto(projectnumber) {
 	return file
 }
 
+FindStampedFolder(projectnumber) {
+	return FindLatestFolder(PDFFolder(projectnumber),"Stamped*",0)
+}
+
+FindPlansToStamp(projectnumber) { 
+	StampedFolder := FindStampedFolder(projectnumber)
+	If StampedFolder <> ""
+	{
+		return FindLatestFile(StampedFolder, "*_01*.pdf", 0)
+	}
+}
+
+FindCalcsToStamp(projectnumber) { 
+	StampedFolder := FindStampedFolder(projectnumber)
+	If StampedFolder <> ""
+	{
+		return FindLatestFile(StampedFolder, "*JB-" . projectnumber . "*.pdf", 0)
+	}
+}
+
 FindLatestReviewPackage(projectnumber) {
-	Global Ignore00Set
-	ignore := ""
-	If Ignore00Set
-		ignore := "*" . projectnumber . "-00.pdf"
-	file := FindLatestFile(StructuralFolder(projectnumber), "*JB-" . projectnumber . "*.pdf", 1, ignore)
+	Global SearchForLegacyReviewPackages
+	file := FindLatestFile(StructuralFolder(projectnumber), "*JB-" . projectnumber . "-00*_Calcs_ENP*_ALL.pdf", 1)
+	If file = "" And SearchForLegacyReviewPackages
+	{
+		Global Ignore00Set
+		ignore := ""
+		If Ignore00Set
+			ignore := "*" . projectnumber . "-00.pdf"
+		file := FindLatestFile(StructuralFolder(projectnumber), "*JB-" . projectnumber . "*.pdf", 1, ignore)
+	}
 	return file
 }
 
@@ -312,7 +378,11 @@ FindLatestENP(projectnumber) {
 	return file
 }
 
-FindLatestFile(path, pattern, recurse, ignore="") {
+FindLatestFolder(path, pattern, recurse, ignore="") {
+	return FindLatestFile(path, pattern, recurse, ignore, 2)
+}
+
+FindLatestFile(path, pattern, recurse, ignore="", foldermode=0) {
 	match := path . "\" . pattern
 	ignorematch := path . "\" . ignore
 	latestfile = ""
@@ -320,10 +390,10 @@ FindLatestFile(path, pattern, recurse, ignore="") {
 	IgnoreList =
 	If StrLen(ignore) > 0
 	{
-		Loop, %ignorematch%, 0, %recurse%
+		Loop, %ignorematch%, %foldermode%, %recurse%
 			IgnoreList = %IgnoreList%%A_LoopFileFullPath%`n
 	}
-	Loop, %match%, 0,%recurse%
+	Loop, %match%, %foldermode%,%recurse%
 		FileList = %FileList%%A_LoopFileTimeModified%`t%A_LoopFileFullPath%`n
 	Sort, FileList  ; Sort by date.
 	Loop, parse, FileList, `n

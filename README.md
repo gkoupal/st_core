@@ -56,11 +56,15 @@ These functions take action based on the active project or project number in you
 * `OpenStructuralFolder()` - Opens the structural folder
 * `OpenPDF()` - Opens the most recent 01 set of drawings found in the PDF folder
 * `OpenPDFOrPDFFolder()` - Tries to open the PDF, but opens the PDF folder if it can't be found
+* `OpenStampedFolder()` - Opens the "Drawings\PDF\Stamped" (or 'Stamped (WET)') if it exists 
 * `OpenLatestPhoto()` - Opens the latest photo in the audit photos folder
 * `OpenLatestENP()` - Opens the latest ENP Excel workbook in the structural folder
 * `OpenLatestReviewPackage()` - Opens the latest PDF review package found in the structural folder
 * `OpenSolarWorks()` - Opens the SolarWorks page for the project
 * `OpenAHJPage()` - Opens the AHJ page for the project
+* `OpenPlansToStamp()` - Opens the most recent plan set in the "Drawings\PDF\Stamped" folder ready for stamping if it exists
+* `OpenCalcsToStamp()` - Opens the most recent calculations package in the "Drawings\PDF\Stamped" folder ready for stamping if it exists
+
 
 ##### Still pretty useful:
 * `ProjectFolder(projectnumber)` - returns the path to the project folder for `projectnumber`
