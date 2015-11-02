@@ -22,6 +22,10 @@ UseProjectNumberFromClipboard = 1
 #4:: OpenPDFFolder()			;Win + 4 opens PDF drawings folder
 #^4:: OpenPDFOrPDFFolder()		;Win + Ctrl + 4 opens latest 01 set or PDF drawings folder
 
+;/* STAMPING FILES */
+#^6:: OpenPlansToStamp()		;Win + Ctrl + 6 opens the latest plan set ready for stamping
+#!6:: OpenCalcsToStamp()		;Win + Alt + 6 opens the latest calculations package ready for stamping
+
 
 ;/* BECOME A PROJECT FOR ACTIVE MODE */
 #^v:: SetProjectFromClipboard()	;Win + Ctrl + v changes the active project to the number in the clipboard

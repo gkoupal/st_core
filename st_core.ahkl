@@ -1,5 +1,5 @@
 GetSTCoreVersion() {
-	return 1.0402
+	return 1.05
 }
 
 ;===Default Options===

@@ -31,6 +31,11 @@ The keys are configured as follows:
 * **Win + 4** opens PDF drawings folder
 * **Win + Ctrl + 4** opens latest 01 set or PDF drawings folder
 
+##### Stamping
+
+* **Win + Ctrl + 6** opens the plan set in the "Drawings\PDF\Stamped" folder that is ready for stamping
+* **Win + Alt + 6** opens the calculations package in the "Drawings\PDF\Stamped" folder that is ready for stamping
+
 ##### Active Project Mode
 
 * **Win + Ctrl + v** changes the active project to the number in the clipboard
