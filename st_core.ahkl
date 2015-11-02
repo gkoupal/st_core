@@ -1,5 +1,5 @@
 GetSTCoreVersion() {
-	return 1.0401
+	return 1.0402
 }
 
 ;===Default Options===
@@ -280,6 +280,34 @@ OpenLatestReviewPackage() {
 	return ""
 }
 
+OpenPlansToStamp() {
+	projectnumber := GetProject()
+	If projectnumber <> 0
+	{
+		rp := FindPlansToStamp(projectnumber)
+		if rp <> ""
+		{
+			Run %rp%
+			return %rp%
+		}
+	}
+	return ""
+}
+
+OpenCalcsToStamp() {
+	projectnumber := GetProject()
+	If projectnumber <> 0
+	{
+		rp := FindCalcsToStamp(projectnumber)
+		if rp <> ""
+		{
+			Run %rp%
+			return %rp%
+		}
+	}
+	return ""
+}
+
 OpenSolarWorks() {
 	projectnumber := GetProject()
 	If projectnumber <> 0
@@ -313,6 +341,22 @@ FindLatestPhoto(projectnumber) {
 
 FindStampedFolder(projectnumber) {
 	return FindLatestFolder(PDFFolder(projectnumber),"Stamped*",0)
+}
+
+FindPlansToStamp(projectnumber) { 
+	StampedFolder := FindStampedFolder(projectnumber)
+	If StampedFolder <> ""
+	{
+		return FindLatestFile(StampedFolder, "*_01*.pdf", 0)
+	}
+}
+
+FindCalcsToStamp(projectnumber) { 
+	StampedFolder := FindStampedFolder(projectnumber)
+	If StampedFolder <> ""
+	{
+		return FindLatestFile(StampedFolder, "*JB-" . projectnumber . "*.pdf", 0)
+	}
 }
 
 FindLatestReviewPackage(projectnumber) {
