@@ -1,5 +1,5 @@
 GetSTCoreVersion() {
-	return 1.05
+	return 1.0501
 }
 
 ;===Default Options===
@@ -362,13 +362,16 @@ FindCalcsToStamp(projectnumber) {
 FindLatestReviewPackage(projectnumber) {
 	Global SearchForLegacyReviewPackages
 	file := FindLatestFile(StructuralFolder(projectnumber), "*JB-" . projectnumber . "-00*_Calcs_ENP*_ALL.pdf", 1)
-	If file = "" And SearchForLegacyReviewPackages
+	If file =  
 	{
-		Global Ignore00Set
-		ignore := ""
-		If Ignore00Set
-			ignore := "*" . projectnumber . "-00.pdf"
-		file := FindLatestFile(StructuralFolder(projectnumber), "*JB-" . projectnumber . "*.pdf", 1, ignore)
+		If SearchForLegacyReviewPackages
+		{
+			Global Ignore00Set
+			ignore := ""
+			If Ignore00Set
+				ignore := "*" . projectnumber . "-00.pdf"
+			file := FindLatestFile(StructuralFolder(projectnumber), "*JB-" . projectnumber . "*.pdf", 1, ignore)
+		}
 	}
 	return file
 }
