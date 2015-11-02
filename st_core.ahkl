@@ -1,5 +1,5 @@
 GetSTCoreVersion() {
-	return 1.04
+	return 1.0401
 }
 
 ;===Default Options===
@@ -172,6 +172,18 @@ OpenPDFFolder() {
 	}
 }
 
+OpenStampedFolder() {
+	projectnumber := GetProject()
+	If projectnumber <> 0
+	{
+		Location := FindStampedFolder(projectnumber)
+		If Location <> ""
+		{
+			Run %Location%
+		}
+	}
+}
+
 OpenPhotosFolder() {
 	projectnumber := GetProject()
 	If projectnumber <> 0
@@ -298,6 +310,10 @@ FindLatestPhoto(projectnumber) {
 	return file
 }
 
+FindStampedFolder(projectnumber) {
+	return FindLatestFolder(PDFFolder(projectnumber),"Stamped*",0)
+}
+
 FindLatestReviewPackage(projectnumber) {
 	Global Ignore00Set
 	ignore := ""
@@ -312,7 +328,11 @@ FindLatestENP(projectnumber) {
 	return file
 }
 
-FindLatestFile(path, pattern, recurse, ignore="") {
+FindLatestFolder(path, pattern, recurse, ignore="") {
+	return FindLatestFile(path, pattern, recurse, ignore, 2)
+}
+
+FindLatestFile(path, pattern, recurse, ignore="", foldermode=0) {
 	match := path . "\" . pattern
 	ignorematch := path . "\" . ignore
 	latestfile = ""
@@ -320,10 +340,10 @@ FindLatestFile(path, pattern, recurse, ignore="") {
 	IgnoreList =
 	If StrLen(ignore) > 0
 	{
-		Loop, %ignorematch%, 0, %recurse%
+		Loop, %ignorematch%, %foldermode%, %recurse%
 			IgnoreList = %IgnoreList%%A_LoopFileFullPath%`n
 	}
-	Loop, %match%, 0,%recurse%
+	Loop, %match%, %foldermode%,%recurse%
 		FileList = %FileList%%A_LoopFileTimeModified%`t%A_LoopFileFullPath%`n
 	Sort, FileList  ; Sort by date.
 	Loop, parse, FileList, `n
