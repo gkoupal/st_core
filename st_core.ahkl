@@ -3,7 +3,8 @@ GetSTCoreVersion() {
 }
 
 ;===Default Options===
-Ignore00Set = 1		;Should FindLatestReviewPackage ignore the *-00.pdf review package?
+SearchForLegacyReviewPackages = 1	;Should FindLatestReviewPackage search for review packages matching the old file naming scheme?
+Ignore00Set = 1						;Should FindLatestReviewPackage ignore the *-00.pdf review package? Only matters if looking for legacy review packages
 
 GetProjectFileLocation() {
 	return "c:\CurrentProjectNumber.txt"
@@ -315,11 +316,16 @@ FindStampedFolder(projectnumber) {
 }
 
 FindLatestReviewPackage(projectnumber) {
-	Global Ignore00Set
-	ignore := ""
-	If Ignore00Set
-		ignore := "*" . projectnumber . "-00.pdf"
-	file := FindLatestFile(StructuralFolder(projectnumber), "*JB-" . projectnumber . "*.pdf", 1, ignore)
+	Global SearchForLegacyReviewPackages
+	file := FindLatestFile(StructuralFolder(projectnumber), "*JB-" . projectnumber . "-00*_Calcs_ENP*_ALL.pdf", 1)
+	If file = "" And SearchForLegacyReviewPackages
+	{
+		Global Ignore00Set
+		ignore := ""
+		If Ignore00Set
+			ignore := "*" . projectnumber . "-00.pdf"
+		file := FindLatestFile(StructuralFolder(projectnumber), "*JB-" . projectnumber . "*.pdf", 1, ignore)
+	}
 	return file
 }
 
