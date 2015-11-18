@@ -78,6 +78,7 @@ These functions take action based on the active project or project number in you
 
 ##### Useful but advanced:
 * `GetProject()` - returns the current project number from clipboard or active
+* `GetCurrentState()` - returns the state the project is in based on the project number (first three digits are the zip)
 * `SetProject(project_number)` - sets the current active project to `project_number`
 * `SetProjectFromClipboard()` - sets the current active project from whatever is in the clipboard, returns the project number if valid, 0 if not
 * `GetProjectFromClipboard()` - gets a project number from the clipboard, returns the number if valid, 0 if not
