@@ -55,6 +55,7 @@ These functions take action based on the active project or project number in you
 * `OpenPhotosFolder()` - Opens the audit photos folder
 * `OpenStructuralFolder()` - Opens the structural folder
 * `OpenPDF()` - Opens the most recent 01 set of drawings found in the PDF folder
+* `OpenDWG()` - Opens the most recent AutoCAD drawing from the AutoCAD folder
 * `OpenPDFOrPDFFolder()` - Tries to open the PDF, but opens the PDF folder if it can't be found
 * `OpenStampedFolder()` - Opens the "Drawings\PDF\Stamped" (or 'Stamped (WET)') if it exists 
 * `OpenLatestPhoto()` - Opens the latest photo in the audit photos folder
@@ -70,8 +71,10 @@ These functions take action based on the active project or project number in you
 * `ProjectFolder(projectnumber)` - returns the path to the project folder for `projectnumber`
 * `StructuralFolder(projectnumber)` - returns the path to the structural folder for `projectnumber`
 * `PDFFolder(projectnumber)` - returns the path to the PDF folder for `projectnumber`
+* `AutoCADFolder(projectnumber)` - returns the path to the AutoCAD folder for `projectnumber`
 * `PhotosFolder(projectnumber)` - returns the path to the Audit Photos folder for `projectnumber`
 * `Find01PDF(projectnumber)` - returns the path to the latest 01 PDF for `projectnumber`, blank if not found
+* `FindDWG(projectnumber)` - returns the path to the latest AutoCAD drawing for `projectnumber`, blank if not found
 * `FindLatestPhoto(projectnumber)` - returns the path to the latest photo in the audit photos folder for `projectnumber`, blank if not found
 * `FindLatestReviewPackage(projectnumber)` - returns the path to the latest review package PDF for `projectnumber`, blank if not found
 * `FindLatestENP(projectnumber)` - returns the path to the latest ENP workbook for `projectnumber`, blank if not found

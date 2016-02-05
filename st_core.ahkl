@@ -147,6 +147,10 @@ PDFFolder(projectnumber) {
 	return ProjectFolder(projectnumber) "\Drawings\PDF"
 }
 
+AutoCADFolder(projectnumber) {
+	return ProjectFolder(projectnumber) "\Drawings\AutoCAD"
+}
+
 PhotosFolder(projectnumber) {
 	return ProjectFolder(projectnumber) "\Photos\Audit Photos"
 }
@@ -233,6 +237,20 @@ OpenPDF() {
 		{
 			Run %PDF%
 			return %PDF%
+		}
+	}
+	return ""
+}
+
+OpenDWG() {
+	projectnumber := GetProject()
+	If projectnumber <> 0
+	{
+		dwg := FindDWG(projectnumber)
+		If dwg <> ""
+		{
+			Run %dwg%
+			return %dwg%
 		}
 	}
 	return ""
@@ -331,6 +349,11 @@ OpenAHJPage() {
 
 Find01PDF(projectnumber) {
 	file := FindLatestFile(PDFFolder(projectnumber), "*_01.pdf", 0)
+	return file
+}
+
+FindDWG(projectnumber) {
+	file := FindLatestFile(AutoCADFolder(projectnumber), "*_01.dwg", 0)
 	return file
 }
 
