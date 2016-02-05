@@ -14,7 +14,7 @@ The keys are configured as follows:
 ##### Photos
 
 * **Win + 9** opens photos folder
-* **Win + 9** opens most recent photo
+* **Ctrl + Win + 9** opens most recent photo
 
 ##### Project Folder
 

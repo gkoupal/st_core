@@ -8,7 +8,7 @@ UseProjectNumberFromClipboard = 1
 
 ;/* PHOTOS */
 #9:: OpenPhotosFolder()			;Win + 9 opens photos folder
-#^9:: OpenLatestPhoto()			;Win + 9 opens most recent photo
+#^9:: OpenLatestPhoto()			;Ctrl + Win + 9 opens most recent photo
 
 ;/* MAIN PROJECT FOLDER */
 #7:: OpenProjectFolder()		;Win + 7 opens project folder
