@@ -1,5 +1,5 @@
 GetSTCoreVersion() {
-	return 1.0601
+	return 1.0602
 }
 
 ;===Default Options===
@@ -66,7 +66,7 @@ GetProjectFromClipboard() {
 }
 
 GetInstIDFromAPI(projectnumber) {
-	apiurl := "http://10.100.1.148/designapi/api/customer/installation/"
+	apiurl := "http://slc5eng90/designapi/api/customer/installation/"
 	tmpfile = %A_ScriptDir%\instid.tmp
 	UrlDownloadToFile, %apiurl%%projectnumber%, %tmpfile%
 	FileReadLine, InstID, %tmpfile%, 1
